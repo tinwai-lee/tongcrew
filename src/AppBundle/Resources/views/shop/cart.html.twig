@@ -1,0 +1,159 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<div id="app">
+	<!-- SubHeader =============================================== -->
+	<section class="parallax-window" id="short" data-parallax="scroll" data-image-src="/img/banner.jpg" data-natural-width="1366" data-natural-height="666">
+		<div id="subheader">
+			<div id="sub_content">
+				<h1>訂單結帳</h1>
+				<!-- <div class="bs-wizard">
+					<div class="col-xs-4 bs-wizard-step active">
+						<div class="text-center bs-wizard-stepnum"><strong>1.</strong> 送貨資料</div>
+						<div class="progress"><div class="progress-bar"></div></div>
+						<a href="#0" class="bs-wizard-dot"></a>
+					</div>
+					
+					<div class="col-xs-4 bs-wizard-step disabled">
+						<div class="text-center bs-wizard-stepnum"><strong>2.</strong> Payment</div>
+						<div class="progress"><div class="progress-bar"></div></div>
+						<a href="cart_2.html" class="bs-wizard-dot"></a>
+					</div>
+					
+					<div class="col-xs-4 bs-wizard-step disabled">
+						<div class="text-center bs-wizard-stepnum"><strong>3.</strong> Finish!</div>
+						<div class="progress"><div class="progress-bar"></div></div>
+						<a href="cart_3.html" class="bs-wizard-dot"></a>
+					</div>
+				</div>--><!-- End bs-wizard -->
+			</div><!-- End sub_content -->
+		</div><!-- End subheader -->
+	</section><!-- End section -->
+	<!-- End SubHeader ============================================ -->
+	<!-- Content ================================================== -->
+	<div class="container margin_60_35">
+		<div class="row">
+			<div class="col-md-3">
+
+				<div class="box_style_2 hidden-xs info">
+					<h4 class="nomargin_top">送貨流程 <i class="icon_clock_alt pull-right"></i></h4>
+					<p>
+						前一天晚上八點前及當天早上十點前下單，送貨時間爲十二點至兩點。
+					</p>
+					<hr>
+					<h4>付款方法 <i class="icon-money pull-right"></i></h4>
+					<p>
+						暫時只接受現金到付。
+					</p>
+				</div><!-- End box_style_1 -->
+
+				<div class="box_style_2 hidden-xs" id="help">
+				    <img src="/img/whatsapp.png" style="width: 60px" />
+                    <h4>聯絡客服</h4>
+                    <a href="tel://56891075" class="phone">56891075</a>
+                    <small>服務時間：9.00am - 3.30pm</small>
+				</div>
+
+			</div><!-- End col-md-3 -->
+
+			<div class="col-md-6">
+				<div class="box_style_2" id="order_process">
+					<h2 class="inner">送貨資料</h2>
+					<div class="form-group">
+						<label>姓名</label>
+						<input type="text" class="form-control" id="name" name="name" placeholder="姓名">
+					</div>
+					<div class="form-group">
+						<label>手提電話號碼</label>
+						<input type="text" id="mobile" name="mobile" class="form-control" placeholder="手提電話號碼">
+					</div>
+					<div class="form-group">
+						<div class="form-group">
+							<label>送貨地區</label>
+							<select class="form-control" name="district" id="district">
+								<option value="kowloon-bay" selected>九龍灣</option>
+								<option value="kwun-tong">觀塘</option>
+								<option value="central">中環</option>
+								<option value="san-po-kong">新䈬崗</option>
+								<option value="quarry-bay">鰂魚涌</option>
+							</select>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6 col-sm-6">
+							<label>送貨街道</label>
+						<input type="text" id="address" name="address" class="form-control" placeholder="送貨街道">
+						</div>
+						<div class="col-md-6 col-sm-6">
+							<div class="form-group">
+								<label>送貨大廈</label>
+								<input type="text" id="building" name="building" class="form-control" placeholder="送貨大廈">
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6 col-sm-6">
+							<div class="form-group">
+								<label>送貨樓層</label>
+								<input type="text" id="floor" name="floor" class="form-control" placeholder="送貨樓層">
+							</div>
+						</div>
+						<div class="col-md-6 col-sm-6">
+							<div class="form-group">
+								<label>送貨單位</label>
+								<input type="text" id="room" name="room" class="form-control" placeholder="送貨單位">
+							</div>
+						</div>
+					</div>
+				</div><!-- End box_style_1 -->
+			</div><!-- End col-md-6 -->
+				
+			<div class="col-md-3" id="sidebar">
+				<div class="theiaStickySidebar">
+					<div id="cart_box">
+						<h3>您的訂單 <i class="icon_cart_alt pull-right"></i></h3>
+						<table class="table table_summary">
+							<tbody>
+								{% for id, order in orders %}
+								<tr>
+									<td>
+										<strong>{{ order['quantity'] }}<i class="icon-cancel"></i></strong> {{ order['name'] }}
+									</td>
+									<td>
+										<strong class="pull-right">${{ order['price'] }}</strong>
+									</td>
+								</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+						<hr>
+						<div class="row" id="options_2" style="padding-left: 20px;">
+							<p>使用優惠券 <span id="times"><i class="icon-cancel"></i></span> {{ usedCoupons }}</p>
+						</div><!-- Edn options 2 -->
+						<hr>
+						<table class="table table_summary">
+							<tbody>
+								<tr>
+									<td>
+										小計 <span class="pull-right">${{ subtotal }}</span>
+									</td>
+								</tr>
+								<tr>
+									<td class="total">
+										總數 <span class="pull-right">${{ total }}</span>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<hr>
+						<a class="btn_full" href="javascript:void(0)" onclick="window.alert('done')">完成結帳</a>
+						<a class="btn_full_outline" href="{{ url('homepage') }}"><i class="icon-right"></i> 更改訂單</a>
+					</div><!-- End cart_box -->
+				</div><!-- End theiaStickySidebar -->
+			</div><!-- End col-md-3 -->
+							
+		</div><!-- End row -->
+	</div><!-- End container -->
+<!-- End Content =============================================== -->
+</div>									
+{% endblock %}
+

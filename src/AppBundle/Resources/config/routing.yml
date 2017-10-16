@@ -1,0 +1,7 @@
+homepage:
+    path:     /
+    defaults: { _controller: AppBundle:Shop:index }
+
+cart:
+    path:     /cart
+    defaults: { _controller: AppBundle:Shop:cart }
